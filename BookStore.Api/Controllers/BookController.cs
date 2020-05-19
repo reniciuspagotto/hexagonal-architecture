@@ -1,4 +1,5 @@
-﻿using BookStore.Application.Commands;
+﻿using BookStore.Application.UseCases.Commands.CreateBook;
+using BookStore.Application.UseCases.Queries.ListBook;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Api.Controllers
@@ -7,11 +8,13 @@ namespace BookStore.Api.Controllers
     [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
-        private readonly IBookHandler _bookHandler;
+        private readonly ICreateBookHandler _bookHandler;
+        private readonly IListBookHandler _listBookHandler;
 
-        public BookController(IBookHandler bookHandler)
+        public BookController(ICreateBookHandler bookHandler, IListBookHandler listBookHandler)
         {
             _bookHandler = bookHandler;
+            _listBookHandler = listBookHandler;
         }
 
         [HttpPost]
@@ -19,6 +22,13 @@ namespace BookStore.Api.Controllers
         {
             _bookHandler.Save(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = _listBookHandler.GetAll();
+            return Ok(result);
         }
     }
 }

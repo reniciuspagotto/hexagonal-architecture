@@ -1,4 +1,4 @@
-﻿namespace BookStore.Application.Commands
+﻿namespace BookStore.Application.UseCases.Commands.CreateBook
 {
     public class CreateBookCommand
     {

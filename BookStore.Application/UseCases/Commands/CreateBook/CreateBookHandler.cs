@@ -1,13 +1,13 @@
 ﻿using BookStore.Domain.Entities;
 using BookStore.Domain.Repositories;
 
-namespace BookStore.Application.Commands
+namespace BookStore.Application.UseCases.Commands.CreateBook
 {
-    public class BookHandler : IBookHandler
+    public class CreateBookHandler : ICreateBookHandler
     {
         private readonly IBookRepository _bookRepository;
 
-        public BookHandler(IBookRepository bookRepository)
+        public CreateBookHandler(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }

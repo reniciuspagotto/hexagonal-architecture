@@ -1,6 +1,8 @@
 ﻿using BookStore.Domain.Entities;
 using BookStore.Domain.Repositories;
 using BookStore.Infrastructure.Context;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BookStore.Infrastructure.Repositories
 {
@@ -11,6 +13,11 @@ namespace BookStore.Infrastructure.Repositories
         public BookRepository(DataContext dbContext)
         {
             _dataContext = dbContext;
+        }
+
+        public IEnumerable<Book> GetAll()
+        {
+            return _dataContext.Books.ToList();
         }
 
         public void Save(Book data)

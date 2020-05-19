@@ -1,4 +1,5 @@
-﻿using BookStore.Application.Commands;
+﻿using BookStore.Application.UseCases.Commands.CreateBook;
+using BookStore.Application.UseCases.Queries.ListBook;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookStore.Application
@@ -7,7 +8,8 @@ namespace BookStore.Application
     {
         public static void ConfigureHandlers(this IServiceCollection services)
         {
-            services.AddTransient<IBookHandler, BookHandler>();
+            services.AddTransient<ICreateBookHandler, CreateBookHandler>();
+            services.AddTransient<IListBookHandler, ListBookHandler>();
         }
     }
 }

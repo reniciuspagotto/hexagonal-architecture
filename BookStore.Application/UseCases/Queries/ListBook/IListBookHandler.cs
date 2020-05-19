@@ -1,11 +1,10 @@
 ﻿using BookStore.Domain.Entities;
 using System.Collections.Generic;
 
-namespace BookStore.Domain.Repositories
+namespace BookStore.Application.UseCases.Queries.ListBook
 {
-    public interface IBookRepository
+    public interface IListBookHandler
     {
-        void Save(Book data);
         IEnumerable<Book> GetAll();
     }
 }
