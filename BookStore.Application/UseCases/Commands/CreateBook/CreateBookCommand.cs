@@ -1,6 +1,8 @@
-﻿namespace BookStore.Application.UseCases.Commands.CreateBook
+﻿using MediatR;
+
+namespace BookStore.Application.UseCases.Commands.CreateBook
 {
-    public class CreateBookCommand
+    public class CreateBookCommand : IRequest<object>
     {
         public string Name { get; set; }
         public string Description { get; set; }

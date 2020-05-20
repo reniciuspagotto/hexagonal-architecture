@@ -1,10 +1,11 @@
-﻿using BookStore.Domain.Entities;
-using BookStore.Domain.Repositories;
-using System.Collections.Generic;
+﻿using BookStore.Domain.Repositories;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BookStore.Application.UseCases.Queries.ListBook
 {
-    public class ListBookHandler : IListBookHandler
+    public class ListBookHandler : IRequestHandler<ListBookCommand, object>
     {
         private readonly IBookRepository _bookRepository;
 
@@ -13,9 +14,9 @@ namespace BookStore.Application.UseCases.Queries.ListBook
             _bookRepository = bookRepository;
         }
 
-        public IEnumerable<Book> GetAll()
+        public async Task<object> Handle(ListBookCommand request, CancellationToken cancellationToken)
         {
-            return _bookRepository.GetAll();
+            return await _bookRepository.GetAll();
         }
     }
 }

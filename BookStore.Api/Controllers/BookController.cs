@@ -1,6 +1,8 @@
 ﻿using BookStore.Application.UseCases.Commands.CreateBook;
 using BookStore.Application.UseCases.Queries.ListBook;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BookStore.Api.Controllers
 {
@@ -8,26 +10,24 @@ namespace BookStore.Api.Controllers
     [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
-        private readonly ICreateBookHandler _bookHandler;
-        private readonly IListBookHandler _listBookHandler;
+        private readonly IMediator _mediator;
 
-        public BookController(ICreateBookHandler bookHandler, IListBookHandler listBookHandler)
+        public BookController(IMediator mediator)
         {
-            _bookHandler = bookHandler;
-            _listBookHandler = listBookHandler;
+            _mediator = mediator;
         }
 
         [HttpPost]
         public IActionResult Save(CreateBookCommand command)
         {
-            _bookHandler.Save(command);
+            _mediator.Send(command);
             return Ok();
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _listBookHandler.GetAll();
+            var result = await _mediator.Send(new ListBookCommand());
             return Ok(result);
         }
     }

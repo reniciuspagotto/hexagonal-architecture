@@ -1,6 +1,8 @@
 ﻿using BookStore.Application.UseCases.Commands.CreateBook;
 using BookStore.Application.UseCases.Queries.ListBook;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BookStore.Application
 {
@@ -8,8 +10,7 @@ namespace BookStore.Application
     {
         public static void ConfigureHandlers(this IServiceCollection services)
         {
-            services.AddTransient<ICreateBookHandler, CreateBookHandler>();
-            services.AddTransient<IListBookHandler, ListBookHandler>();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }
 }

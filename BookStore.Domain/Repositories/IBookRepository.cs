@@ -1,11 +1,12 @@
 ﻿using BookStore.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookStore.Domain.Repositories
 {
     public interface IBookRepository
     {
-        void Save(Book data);
-        IEnumerable<Book> GetAll();
+        Task Save(Book data);
+        Task<IEnumerable<Book>> GetAll();
     }
 }
