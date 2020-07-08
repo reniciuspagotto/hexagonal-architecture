@@ -1,6 +1,4 @@
-﻿using BookStore.Application.UseCases.Commands.CreateBook;
-using BookStore.Application.UseCases.Queries.ListBook;
-using MediatR;
+﻿using BookStore.Core.Business.BookService.CreateBook;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -10,25 +8,18 @@ namespace BookStore.Api.Controllers
     [Route("api/[controller]")]
     public class BookController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly ICreateBookUseCase _createBookUseCase;
 
-        public BookController(IMediator mediator)
+        public BookController(ICreateBookUseCase createBookUseCase)
         {
-            _mediator = mediator;
+            _createBookUseCase = createBookUseCase;
         }
 
         [HttpPost]
-        public IActionResult Save(CreateBookCommand command)
+        public async Task<IActionResult> Save(CreateBookInput command)
         {
-            _mediator.Send(command);
+            await _createBookUseCase.Execute(command);
             return Ok();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _mediator.Send(new ListBookCommand());
-            return Ok(result);
         }
     }
 }

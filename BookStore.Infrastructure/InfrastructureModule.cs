@@ -1,4 +1,4 @@
-﻿using BookStore.Domain.Repositories;
+﻿using BookStore.Core.Repositories;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ namespace BookStore.Infrastructure
 {
     public static class InfrastructureModule
     {
-        public  static void ConfigureDatabase(this IServiceCollection services)
+        public static void ConfigureDatabase(this IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase(databaseName: "BookStore"));
         }

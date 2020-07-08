@@ -1,8 +1,6 @@
-﻿using BookStore.Domain.Entities;
-using BookStore.Domain.Repositories;
+﻿using BookStore.Core.Domain.Entities;
+using BookStore.Core.Repositories;
 using BookStore.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BookStore.Infrastructure.Repositories
@@ -14,11 +12,6 @@ namespace BookStore.Infrastructure.Repositories
         public BookRepository(DataContext dbContext)
         {
             _dataContext = dbContext;
-        }
-
-        public async Task<IEnumerable<Book>> GetAll()
-        {
-            return await _dataContext.Books.ToListAsync();
         }
 
         public async Task Save(Book data)
